@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="#" th:action="@{/processRegistration}" th:object="${user}" method="post" class="form-horizontal">
+                <h1>REGISTER TO WEBSITE</h1>
+                <p><input type="text" name="username" placeholder="username" th:field="*{username}"></p>
+                <p><input type="password" name="password" th:field="*{password}"></p>
+                <p><input type="submit" value="REGISTER"></p>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="#" th:action="@{/savejoke}" th:object="${joke}" method="post">
+               <p>JOKE <input type="text" th:field="*{joke}"></p>
+                <p><input type="hidden" th:field="*{id}"></p>
+                <p><input type="submit" value="Submit"><input type="reset" value="Reset"></p>
+                <p th:if="${#fields.hasErrors('joke')}" th:errors="*{joke}">joke error</p>
+
+
+            </form>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-info" th:href="@{/}">view jokes</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
