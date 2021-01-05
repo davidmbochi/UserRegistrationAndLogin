@@ -4,6 +4,8 @@ import com.david.sample.model.Joke;
 import com.david.sample.model.User;
 import com.david.sample.repository.JokeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,12 +15,12 @@ import java.util.List;
 public class JokeServiceImpl implements JokeService{
     private final JokeRepository jokeRepository;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
-    public JokeServiceImpl(JokeRepository jokeRepository){
+    public JokeServiceImpl(UserService userService,JokeRepository jokeRepository){
         this.jokeRepository = jokeRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -30,6 +32,10 @@ public class JokeServiceImpl implements JokeService{
     @Override
     @Transactional
     public void save(Joke theJoke) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userService.findUserByName(username);
+        theJoke.setUser(user);
         jokeRepository.save(theJoke);
     }
 
