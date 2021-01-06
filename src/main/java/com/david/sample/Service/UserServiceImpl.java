@@ -1,6 +1,5 @@
 package com.david.sample.Service;
 
-import com.david.sample.model.Joke;
 import com.david.sample.model.Role;
 import com.david.sample.model.User;
 import com.david.sample.repository.RoleDao;
@@ -17,6 +16,7 @@ import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl  implements UserService{
     @Autowired
@@ -38,7 +38,7 @@ public class UserServiceImpl  implements UserService{
     @Transactional
     public void save(User theUser) {
         User user = new User();
-        user.setUsername(theUser.getUsername());
+        user.setUserName(theUser.getUserName());
         user.setPassword(passwordEncoder.encode(theUser.getPassword()));
 
         user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_USER")));
@@ -54,7 +54,7 @@ public class UserServiceImpl  implements UserService{
         if (user == null){
             throw new UsernameNotFoundException("invalid username or password");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(),mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){

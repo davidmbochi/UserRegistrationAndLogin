@@ -15,7 +15,7 @@ public class User{
 
     @NotBlank
     @Column(name = "username")
-    private String username;
+    private String userName;
 
     @NotBlank
     @Column(name = "password")
@@ -37,13 +37,13 @@ public class User{
 
     public User(Long id,String username,String password){
         this.id = id;
-        this.username = username;
+        this.userName = username;
         this.password = password;
     }
 
     public User(Long id, @NotBlank String username, @NotBlank String password, List<Joke> jokes, Collection<Role> roles) {
         this.id = id;
-        this.username = username;
+        this.userName = username;
         this.password = password;
         this.jokes = jokes;
         this.roles = roles;
@@ -55,13 +55,13 @@ public class User{
     public void setId(Long id){
         this.id = id;
     }
-    public String getUsername(){
-        return this.username;
+    public String getUserName(){
+        return this.userName;
     }
 
 
-    public void setUsername(String username){
-        this.username = username;
+    public void setUserName(String username){
+        this.userName = username;
     }
 
     public String getPassword(){
@@ -85,5 +85,14 @@ public class User{
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
